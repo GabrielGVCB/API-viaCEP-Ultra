@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado do CEP</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="card">
+        <p>
+            <strong>CEP:</strong> <span id="cep"></span>
+        </p>
+        <p>
+            <strong>Logradouro:</strong> <span id="logradouro"></span>
+        </p>
+        <p>
+            <strong>Complemento:</strong> <span id="complemento"></span>
+        </p>
+        <p>
+            <strong>Bairro:</strong> <span id="bairro"></span>
+        </p>
+        <p>
+            <strong>Localidade:</strong> <span id="localidade"></span>
+        </p>
+        <p>
+            <strong>UF:</strong> <span id="uf"></span>
+        </p>
+
+        <!-- Botão Nova Busca -->
+        <button id="newSearchBtn">Nova Busca</button><br><br>
+
+        <!-- Botão Registros -->
+        <button id="records">Registros</button>
+    </div>
+
+    <script>
+        // botão Nova Busca
+        document.getElementById('newSearchBtn').addEventListener('click', () => {
+            localStorage.removeItem("cepData");
+            window.location.href = 'index.html';
+        });
+
+        //botão Registros
+        document.getElementById('records').onclick = function () {
+            window.location.href = "records.html";
+        };
+
+        // Carrega os dados do localStorage
+            const cepData = JSON.parse(localStorage.getItem("cepData"));
+
+            if (cepData) {
+                document.getElementById('cep').textContent = cepData.cep || "Não informado";
+                document.getElementById('logradouro').textContent = cepData.logradouro || "Não informado";
+                document.getElementById('complemento').textContent = cepData.complemento || "Não informado";
+                document.getElementById('bairro').textContent = cepData.bairro || "Não informado";
+                document.getElementById('localidade').textContent = cepData.localidade || "Não informado";
+                document.getElementById('uf').textContent = cepData.uf || "Não informado";
+
+                // Enviar os dados para o banco de dados
+                fetch('http://localhost:3000/api/cep', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        cep: cepData.cep,
+                        logradouro: cepData.logradouro,
+                        complemento: cepData.complemento,
+                        bairro: cepData.bairro,
+                        localidade: cepData.localidade,
+                        uf: cepData.uf
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.error('Erro:', error));
+            } else {
+                alert("Nenhum dado encontrado. Redirecionando para a página inicial.");
+                window.location.href = "index.html";
+            }
+
+    </script>
+</body>
+
+</html>

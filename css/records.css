@@ -1,0 +1,62 @@
+.corpo {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0e1326;
+}
+
+.table  {
+    width: 150vh !important;
+}
+
+.botoesRegistros {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.inicio {
+    background-color: #ff4f3f;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    justify-content: center;
+    width: 15vh;
+
+}
+
+.filtrar .btn {
+    background-color: #01aef0;
+    color: #fff;
+    border: #ff4f3f;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 15vh;
+
+}
+
+.filtrar .dropdown-menu {
+    background-color: #ff4f3f;
+}
+
+.filtrar .dropdown-item {
+    color: #0e1326;
+    background-color: transparent;
+    padding: 10px 15px;
+    margin: 5px 0;
+     transition: background-color 0.3s ease;
+}
+
+.filtrar .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+
+}

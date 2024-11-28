@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0e1326;
+
+    /* config da imagem da Ultra */
+        background-image: url(../src/img/imagemFundo.png);
+        background-size: 150vh;
+        background-position: center;
+        background-repeat: no-repeat;
+
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+}
+
+.gv {
+    color: #01aef0;
+}
+
+.icon {
+    background-color: #01aef0;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    border-radius: 8px;
+    /* config imagem ultra */
+    background-image: url(../src/img/ultraicon.png);
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+
+}
+
+.wrapper {
+    width: 300px;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(9px);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #ff4f3f;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.records {
+    background-color: #01aef0;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+}
+
+button:hover {
+    background-color: #ff4f3f;
+}
