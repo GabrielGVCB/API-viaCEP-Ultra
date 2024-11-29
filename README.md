@@ -1,4 +1,4 @@
-Aqui está o README atualizado com o link para o projeto hospedado no Vercel:  
+
 
 ```markdown
 # API viaCEP
