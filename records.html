@@ -14,7 +14,6 @@
 
 <body class="corpo">
     <main>
-        
         <table class="table">
             <thead>
                 <tr>
@@ -26,6 +25,7 @@
                     <th scope="col">Localidade</th>
                     <th scope="col">UF</th>
                     <th scope="col">Data</th>
+                    <th scope="col">Deletar Consulta</th>
                 </tr>
             </thead>
             <tbody id="tabelaRegistros">
@@ -34,13 +34,10 @@
         </table>
 
         <div class="botoesRegistros">
-
-            <!-- Botão Início -->
             <button class="inicio" id="inicioBtn">Início</button>
-
-            <!-- Botão de sanduíche -->
             <div class="filtrar">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Filtrar
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -48,9 +45,7 @@
                     <li><a class="dropdown-item" href="#" id="ordenarBairro">Ordenar por Bairro</a></li>
                 </ul>
             </div>
-
         </div>
-
     </main>
 
     <!-- JS bootstrap -->
@@ -59,26 +54,21 @@
         crossorigin="anonymous"></script>
 
     <script>
-        let registros = []; // Array para armazenar os registros
+        let registros = [];
 
-        // Função para buscar registros da API
         async function buscarRegistros() {
             try {
-                const response = await fetch('http://localhost:3000/api/consultas'); // Endpoint API
+                const response = await fetch('http://localhost:3000/api/consultas');
                 registros = await response.json();
-
-                exibirRegistros(); // Exibe os registros
+                exibirRegistros();
             } catch (error) {
                 console.error('Erro ao buscar registros:', error);
             }
         }
 
-        // Função para exibir registros na tabela
         function exibirRegistros() {
             const tabela = document.getElementById('tabelaRegistros');
             tabela.innerHTML = '';
-
-            // Adiciona os registros na tabela
             registros.forEach((registro) => {
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
@@ -90,31 +80,53 @@
                     <td>${registro.localidade}</td>
                     <td>${registro.uf}</td>
                     <td>${new Date(registro.consulta_data).toLocaleString()}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="excluirRegistro(${registro.id})">Excluir</button>
+                    </td>
                 `;
                 tabela.appendChild(linha);
             });
         }
 
-        // Carregar registros ao abrir
+
+        async function excluirRegistro(id) { //apenas pra testar se o DELETE iria voltar
+                console.log(`Excluindo registro com ID: ${id}`);
+            }
+
+
+        async function excluirRegistro(id) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/consultas/${id}`, {
+                    method: 'DELETE',
+                });
+
+                if (response.ok) {
+                    registros = registros.filter((registro) => registro.id !== id);
+                    exibirRegistros();
+                    alert('Registro excluído com sucesso!');
+                } else {
+                    alert('Erro ao excluir o registro.');
+                }
+            } catch (error) {
+                console.error('Erro ao excluir registro:', error);
+            }
+        }
+
         window.onload = buscarRegistros;
 
-        // evento botão Início
         document.getElementById('inicioBtn').addEventListener('click', () => {
             window.location.href = 'index.html';
         });
 
-        // evento para ordenar por logradouro
         document.getElementById('ordenarLogradouro').addEventListener('click', () => {
             registros.sort((a, b) => a.logradouro.localeCompare(b.logradouro));
             exibirRegistros();
         });
 
-        // evento para ordenar por bairro
         document.getElementById('ordenarBairro').addEventListener('click', () => {
             registros.sort((a, b) => a.bairro.localeCompare(b.bairro));
             exibirRegistros();
         });
-
     </script>
 </body>
 
