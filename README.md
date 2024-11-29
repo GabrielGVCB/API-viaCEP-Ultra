@@ -62,4 +62,3 @@ O projeto foi implantado na plataforma Vercel e pode ser acessado por meio do se
 ## ℹ️ Informações Adicionais  
 Criado por **Gabriel Vinicius**.  
 Este projeto foi desenvolvido com foco em integrar consultas da API viaCEP com armazenamento de dados no MySQL.
-```
